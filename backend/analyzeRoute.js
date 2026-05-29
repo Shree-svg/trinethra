@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 const { buildPrompt } = require('./promptBuilder');
 const { generateFromOllama } = require('./ollamaClient');
-const prebakedResponses = require('./prebakedResponses');
 
 /**
  * Strips markdown code blocks and backticks from the LLM output.
@@ -26,18 +25,6 @@ router.post('/analyze', async (req, res) => {
 
   if (!transcript || typeof transcript !== 'string') {
     return res.status(400).json({ error: 'A transcript string is required in the request body.' });
-  }
-
-  // Intercept and return prebaked responses for the sample transcripts to ensure instant demo and correct evaluation
-  const lowerTranscript = transcript.toLowerCase();
-  if (lowerTranscript.includes('karthik') || lowerTranscript.includes('veerabhadra') || lowerTranscript.includes('suresh')) {
-    return res.json(prebakedResponses.karthik);
-  }
-  if (lowerTranscript.includes('meena') || lowerTranscript.includes('lakshmi') || lowerTranscript.includes('arvind')) {
-    return res.json(prebakedResponses.meena);
-  }
-  if (lowerTranscript.includes('anil') || lowerTranscript.includes('prabhat') || lowerTranscript.includes('sunita')) {
-    return res.json(prebakedResponses.anil);
   }
 
   const prompt = buildPrompt(transcript);
