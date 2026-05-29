@@ -1,70 +1,106 @@
-# Getting Started with Create React App
+# Trinethra Frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+The React-based frontend for Trinethra – the Supervisor Feedback Analyzer. This dashboard provides an intuitive interface for uploading transcripts, initiating analyses, and reviewing detailed performance feedback.
 
-## Available Scripts
+---
 
-In the project directory, you can run:
+## 🎯 Overview
+
+The Trinethra frontend is a modern React application built with Create React App that delivers:
+- **Dark-themed dashboard** – Optimized for readability during extended analysis sessions
+- **Real-time feedback** – Displays scores, evidence, and insights as they stream from the backend
+- **Interactive heat-maps** – Visual representation of KPI alignment
+- **Error handling** – Clear, user-friendly error messages when analysis fails
+
+---
+
+## 🚀 Quick Start
+
+### Prerequisites
+- Node.js v20 or higher
+- Backend running on `http://localhost:5001` (see `/backend` for setup)
+
+### Installation & Development
+
+```bash
+npm install
+npm start
+```
+
+The app will open at **http://localhost:3000** in your browser. Hot-reload is enabled – changes to source files will trigger an automatic refresh.
+
+---
+
+## 📦 Available Scripts
 
 ### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
-
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+Runs the app in development mode with hot-reload enabled.
 
 ### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Launches the test runner in interactive watch mode.
 
 ### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Builds the app for production. Output is optimized and minified in the `build/` folder.
 
 ### `npm run eject`
+**⚠️ One-way operation** – Ejects from Create React App to expose webpack and other configurations. Use only if you need full control over the build setup.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 🏗️ Project Structure
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+```
+frontend/
+├── public/              # Static assets
+├── src/
+│   ├── components/      # Reusable React components
+│   ├── pages/           # Top-level page components
+│   ├── api/             # Backend API calls
+│   ├── App.js           # Root component
+│   └── index.js         # Entry point
+├── package.json
+└── README.md
+```
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+---
 
-## Learn More
+## 🔗 API Integration
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+The frontend communicates with the backend via the `/api/analyze` endpoint:
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+```javascript
+POST http://localhost:5001/api/analyze
+Content-Type: application/json
 
-### Code Splitting
+{
+  "transcript": "Your transcript text here..."
+}
+```
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+Response includes:
+- Rubric scores (1–10 scale)
+- Evidence snippets
+- KPI heat-map
+- Identified gaps
+- Suggested follow-up questions
 
-### Analyzing the Bundle Size
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## 🛠️ Development Tips
 
-### Making a Progressive Web App
+- **Debugging** – Use React Developer Tools browser extension for component inspection
+- **API Testing** – Use Postman or `curl` to test the backend endpoint independently
+- **Environment Variables** – Create a `.env` file to override `REACT_APP_*` variables
+- **Styling** – Modify CSS files in the components directory to match your design system
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+---
 
-### Advanced Configuration
+## 📚 Learn More
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+- [React Documentation](https://reactjs.org/)
+- [Create React App Docs](https://create-react-app.dev/)
+- [Main Trinethra README](../README.md)
 
-### Deployment
+---
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+*Part of the Trinethra project – Supervisor Feedback Analyzer*

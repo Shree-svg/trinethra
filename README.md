@@ -1,6 +1,6 @@
 # Trinethra – Supervisor Feedback Analyzer
 
-![Trinethra Logo](https://via.placeholder.com/150x150?text=Trinethra+Logo)
+![Trinethra Logo](./frontend/public/logo192.png)
 
 Trinethra is a powerful developer‑tool and audit utility that automatically evaluates organizational or operational transcripts – such as performance reviews, 1‑on‑1 supervisor discussions, and candidate evaluations. By analysing conversational transcripts against structured 1‑10 performance rubrics, assessment dimensions, and KPIs, Trinethra extracts key signals, highlights systematic gaps, and generates actionable insights.
 
