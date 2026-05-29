@@ -84,8 +84,8 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
                       onChange={(e) => {
                         // Update both properties to maintain schema compatibility
                         const updated = [...followUpQuestions];
-                        updated[index] = {
-                          ...updated[index],
+                        updated[idx] = {
+                          ...updated[idx],
                           lookingFor: e.target.value,
                           expectedSignal: e.target.value
                         };

@@ -1,82 +1,116 @@
-# Trinethra — Supervisor Feedback Analyzer
+# Trinethra – Supervisor Feedback Analyzer
 
-Trinethra is a developer tool and auditor utility designed to evaluate organizational or operational transcripts (such as performance reviews, 1-on-1 supervisor discussions, and candidate evaluations). By analyzing these conversational transcripts against structured 1-10 performance rubrics, assessment dimensions, and KPIs, Trinethra automatically parses key signals and identifies systemic gaps.
+![Trinethra Logo](https://via.placeholder.com/150x150?text=Trinethra+Logo)
+
+Trinethra is a powerful developer‑tool and audit utility that automatically evaluates organizational or operational transcripts – such as performance reviews, 1‑on‑1 supervisor discussions, and candidate evaluations. By analysing conversational transcripts against structured 1‑10 performance rubrics, assessment dimensions, and KPIs, Trinethra extracts key signals, highlights systematic gaps, and generates actionable insights.
 
 ---
 
-## Architecture Overview
+## ✨ Key Features
 
-Trinethra runs a three-tier system:
+- **Automated Rubric Scoring** – Map transcript content to a 1‑10 performance scale.
+- **KPI Mapping** – Identify behaviours that align with or deviate from defined KPIs.
+- **Gap Analysis** – Surface systemic issues across multiple conversations.
+- **Actionable Follow‑up Questions** – Suggest probing questions for deeper insight.
+- **Local LLM Powered** – Runs entirely on your machine via Ollama (`llama3.2`).
+- **Extensible Architecture** – Plug‑in custom rubrics or LLM back‑ends.
+
+---
+
+## 🏗️ Architecture Overview
 
 ```mermaid
 graph TD
-  A[React Frontend: Port 3000] -->|POST /api/analyze| B[Express Backend: Port 5001]
-  B -->|Prompt Building & API Request| C[Ollama local LLM: Port 11434]
-  C -->|Raw Text Completion| B
-  B -->|Cleans & Parses JSON Response| A
+    A[React Frontend (Port 3000)] -->|POST /api/analyze| B[Express Backend (Port 5001)]
+    B -->|Prompt + API request| C[Ollama Local LLM (Port 11434)]
+    C -->|Raw Text Completion| B
+    B -->|Clean & Parse JSON| A
 ```
 
-- **Frontend (Port 3000)**: Built on React (using Create-React-App). Provides an interactive, dark-themed dashboard to paste transcripts, view numeric scores, study highlighted evidence, map KPI behaviors, explore gap analyses, and review follow-up pointer questions.
-- **Backend (Port 5001)**: Express server that manages prompts and routes requests to the LLM. It features robust markdown-stripping code, JSON cleaning mechanisms, and automatic query retries to ensure response integrity.
-- **Local LLM (Port 11434)**: Serves a local instance of Ollama running `llama3.2` to process high-fidelity assessments.
+- **Frontend** – React (Create‑React‑App) with a dark‑themed dashboard for pasting transcripts, viewing scores, and exploring gaps.
+- **Backend** – Express server that builds prompts, contacts Ollama, sanitises responses, and returns structured JSON.
+- **Local LLM** – Ollama running the `llama3.2` model for high‑fidelity assessments.
 
 ---
 
-## Setup Instructions
+## ⚙️ Setup Instructions
 
-Ensure you have [Node.js](https://nodejs.org/) installed on your machine.
+> **Prerequisite:** Node.js (v20+) and **Ollama** installed on your machine.
 
-### 1. Set Up Ollama
-1. Download and install [Ollama](https://ollama.com/).
-2. Start the Ollama application.
-3. Open your terminal and pull the local model:
-   ```bash
-   ollama pull llama3.2
-   ```
+### 1️⃣ Install Ollama & Pull Model
+```bash
+# Install Ollama from https://ollama.com/
+# After installation, start the UI or run the daemon
+ollama pull llama3.2
+```
 
-### 2. Run the Backend
-1. From the `trinethra` root directory, navigate to `backend/`:
-   ```bash
-   cd backend
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Express server:
-   ```bash
-   npm start
-   ```
-   *(Note: Ensure `backend/package.json` has a start script pointing to `server.js` or start it manually with `node server.js`)*
+### 2️⃣ Backend
+```bash
+cd backend
+npm install
+# Start the server (ensure a "start" script exists in package.json)
+npm start
+# Or manually: node server.js
+```
 
-### 3. Run the Frontend
-1. Open a new terminal window and navigate to the `frontend/` directory from the root:
-   ```bash
-   cd frontend
-   ```
-2. Start the React development server:
-   ```bash
-   npm start
-   ```
-3. Open [http://localhost:3000](http://localhost:3000) in your browser to interact with the UI.
+The backend will listen on **http://localhost:5001**.
+
+### 3️⃣ Frontend
+```bash
+cd ../frontend
+npm install
+npm start
+```
+
+Open **http://localhost:3000** in your browser to access the Trinethra UI.
 
 ---
 
-## Design Challenges Tackled
+## 🚀 Usage Workflow
 
-### 1. Robust Structured JSON Parsing
-LLMs are conversational by nature and frequently decorate their JSON outputs with conversational prefixes, markdown code fences (e.g., \`\`\`json), or tailing notes. This breaks native `JSON.parse` operations in Javascript.
-- **Solution**: Implemented custom regular expressions and string scrubbing algorithms inside the Express route to cleanly slice away formatting backticks and identify raw JSON bounds.
-
-### 2. Fault Tolerance (Automatic Retry)
-Sometimes, local models (like `llama3.2` on resource-constrained host machines) return corrupted JSON structures or ignore output parameters during peak utilization.
-- **Solution**: Configured a retry loop in the `analyze` endpoint. If parsing fails, the backend automatically performs a second call to Ollama before returning a HTTP 500 error, significantly increasing operation success rates.
+1. **Paste a transcript** into the large text area.
+2. Click **"Analyze"** – the UI sends the raw text to the backend.
+3. The backend builds a prompt, calls Ollama, and parses the JSON response.
+4. Results are rendered as:
+   - Numeric rubric scores
+   - Highlighted evidence snippets
+   - KPI heat‑map
+   - Gap‑identification list
+   - Suggested follow‑up questions
 
 ---
 
-## What I Would Improve With More Time
+## 🛠️ Design Challenges Solved
 
-1. **Prompt Tuning & Few-Shot Learning**: Introduce detailed few-shot examples (JSON templates) within the LLM prompt to decrease JSON structure divergence.
-2. **Context Window Expansion**: Transition from string-based input to streaming file uploads (supporting PDFs, SRTs, and audio logs) to accommodate larger transcripts.
-3. **Database Integration**: Add persistent storage (e.g., MongoDB, PostgreSQL, or SQLite) to save past reports and track performance trajectories over time.
-4. **Comprehensive Test Suite**: Implement unit tests (using Jest/Supertest) for the backend prompt construction, and component testing (using React Testing Library) for the dashboards.
+- **Robust JSON Parsing** – Custom regex scrubbing removes markdown fences and stray text before `JSON.parse`.
+- **Automatic Retry Logic** – Backend retries a failed LLM call once to mitigate transient parsing errors.
+- **Error Transparency** – Detailed error messages surface when parsing repeatedly fails, guiding the user to adjust transcript length.
+
+---
+
+## 📦 Future Improvements (Roadmap)
+
+- Prompt tuning & few‑shot learning for higher consistency.
+- Streaming file uploads (PDF, SRT, audio) to handle larger transcripts.
+- Persistent storage (MongoDB / PostgreSQL) for historical reports.
+- Comprehensive test suite (Jest, Supertest, React Testing Library).
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome! Please:
+1. Fork the repository.
+2. Create a feature branch (`git checkout -b feat/awesome‑feature`).
+3. Ensure linting passes (`npm run lint`).
+4. Open a Pull Request describing the changes.
+
+---
+
+## 📄 License
+
+Distributed under the **MIT License**. See `LICENSE` for more information.
+
+---
+
+*This README is auto‑generated by the Trinethra assistant to showcase best practices.*
