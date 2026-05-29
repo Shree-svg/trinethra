@@ -1,0 +1,138 @@
+.score-card {
+  background-color: #1e1e1e;
+  border: 1px solid #333333;
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+}
+
+.score-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #333333;
+  padding-bottom: 1rem;
+}
+
+.score-badge-container {
+  display: flex;
+  align-items: baseline;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #ffffff;
+}
+
+.score-value {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1;
+}
+
+.score-scale {
+  font-size: 1rem;
+  opacity: 0.8;
+  margin-left: 0.2rem;
+}
+
+.score-meta {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.score-label {
+  margin: 0;
+  font-size: 1.4rem;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.score-band-badge {
+  display: inline-block;
+  align-self: flex-start;
+  background-color: #2b2b2b;
+  color: #a0a0a0;
+  padding: 0.25rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 4px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.confidence-badge {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+  border-radius: 20px;
+  border: 1px solid transparent;
+}
+
+.confidence-high {
+  background-color: #1b3821;
+  color: #5eff86;
+  border-color: #275230;
+}
+
+.confidence-medium {
+  background-color: #382d1b;
+  color: #ffb85e;
+  border-color: #524227;
+}
+
+.confidence-low {
+  background-color: #381b1b;
+  color: #ff5e5e;
+  border-color: #522727;
+}
+
+.score-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.section-title {
+  margin: 0 0 0.4rem 0;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  color: #888888;
+  letter-spacing: 0.8px;
+}
+
+.justification-text {
+  margin: 0;
+  line-height: 1.6;
+  color: #d1d1d1;
+  font-size: 1rem;
+}
+
+.bias-section {
+  background-color: #281d13;
+  border: 1px solid #4a341f;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-top: 0.5rem;
+}
+
+.warning-title {
+  color: #ff9f43;
+}
+
+.bias-list {
+  margin: 0;
+  padding-left: 1.25rem;
+  color: #e0d2c5;
+}
+
+.bias-item {
+  margin-top: 0.35rem;
+  font-size: 0.9rem;
+  line-height: 1.4;
+}
