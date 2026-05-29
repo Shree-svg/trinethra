@@ -1,7 +1,6 @@
 # CI workflow for Trinethra
 # Runs on push to main and pull requests
-# It installs dependencies, runs lint and test for both backend and frontend
-# and builds the Docker image to ensure it builds successfully.
+# It installs dependencies, starts an Ollama container, pulls the Llama model, then runs tests.
 
 name: CI
 
@@ -27,6 +26,28 @@ jobs:
         working-directory: ./backend
         run: npm ci
 
+      # Start Ollama container
+      - name: Start Ollama container
+        run: |
+          docker run -d --name ollama -p 11434:11434 ollama/ollama:latest
+
+      # Wait for Ollama to be ready
+      - name: Wait for Ollama
+        run: |
+          for i in {1..30}; do
+            if curl -s http://localhost:11434/api/tags > /dev/null; then
+              echo "Ollama ready"
+              break
+            fi
+            echo "Waiting for Ollama..."
+            sleep 2
+          done
+
+      # Pull the Llama model inside the container
+      - name: Pull Llama model
+        run: |
+          docker exec ollama ollama pull llama3.2
+
       - name: Run backend tests
         working-directory: ./backend
         run: npm test -- --passWithNoTests
@@ -43,3 +64,8 @@ jobs:
         run: |
           docker build -t trinethra-backend ./backend
           docker build -t trinethra-frontend ./frontend
+
+      - name: Stop Ollama container
+        if: always()
+        run: |
+          docker stop ollama && docker rm ollama
