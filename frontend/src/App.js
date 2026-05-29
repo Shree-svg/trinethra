@@ -46,19 +46,26 @@ function App() {
   return (
     <div className="app-container">
       <header className="app-header">
-        <h1>Trinethra — Supervisor Feedback Analyzer</h1>
+        <div className="title">
+          <span className="icon">▲</span>
+          Trinethra
+        </div>
+        <div className="subtitle">Supervisor Feedback Analyzer</div>
+        <div className="subtitle">DeepThought — Internal Tool — Psychology Intern Dashboard</div>
       </header>
 
       <main className="app-content">
+  <div className="divider"></div>
         <div className="input-section">
           <textarea
+            className="textarea"
             placeholder="Paste supervisor transcript here..."
             value={transcript}
             onChange={(e) => setTranscript(e.target.value)}
             disabled={loading}
             rows={10}
           />
-          
+          <div className="char-count">{transcript.length} characters</div>
           <button
             onClick={handleRunAnalysis}
             disabled={loading || !transcript.trim()}

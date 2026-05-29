@@ -1,0 +1,45 @@
+# CI workflow for Trinethra
+# Runs on push to main and pull requests
+# It installs dependencies, runs lint and test for both backend and frontend
+# and builds the Docker image to ensure it builds successfully.
+
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install backend dependencies
+        working-directory: ./backend
+        run: npm ci
+
+      - name: Run backend tests
+        working-directory: ./backend
+        run: npm test
+
+      - name: Install frontend dependencies
+        working-directory: ./frontend
+        run: npm ci
+
+      - name: Run frontend tests
+        working-directory: ./frontend
+        run: npm test -- --watchAll=false
+
+      - name: Build Docker image
+        run: |
+          docker build -t trinethra-backend ./backend
+          docker build -t trinethra-frontend ./frontend

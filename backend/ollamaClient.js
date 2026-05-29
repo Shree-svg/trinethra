@@ -5,7 +5,8 @@
  */
 async function generateFromOllama(prompt) {
   try {
-    const response = await fetch('http://localhost:11434/api/generate', {
+    const ollamaHost = process.env.OLLAMA_HOST || 'http://localhost:11434';
+    const response = await fetch(`${ollamaHost}/api/generate`, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
