@@ -99,28 +99,10 @@ textarea:disabled {
   font-size: 0.95rem;
 }
 
-.result-section {
-  background-color: #1e1e1e;
-  border: 1px solid #333333;
-  border-radius: 8px;
-  padding: 1.5rem;
+.dashboard-results {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
 }
 
-.result-section h2 {
-  margin-top: 0;
-  font-size: 1.5rem;
-  color: #ffffff;
-  border-bottom: 1px solid #333333;
-  padding-bottom: 0.5rem;
-}
-
-.result-json {
-  font-family: 'Courier New', Courier, monospace;
-  background-color: #151515;
-  padding: 1rem;
-  border-radius: 6px;
-  overflow-x: auto;
-  font-size: 0.9rem;
-  color: #a9ffb4;
-  margin: 0;
-}

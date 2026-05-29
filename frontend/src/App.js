@@ -1,5 +1,10 @@
 import React, { useState } from 'react';
 import './App.css';
+import ScoreCard from './components/ScoreCard';
+import EvidenceList from './components/EvidenceList';
+import KpiMapping from './components/KpiMapping';
+import GapAnalysis from './components/GapAnalysis';
+import FollowUpQuestions from './components/FollowUpQuestions';
 
 function App() {
   const [transcript, setTranscript] = useState('');
@@ -70,9 +75,12 @@ function App() {
         )}
 
         {result && (
-          <div className="result-section">
-            <h2>Analysis Results</h2>
-            <pre className="result-json">{JSON.stringify(result, null, 2)}</pre>
+          <div className="dashboard-results">
+            <ScoreCard score={result.score} />
+            <EvidenceList evidence={result.evidence} />
+            <KpiMapping kpiMapping={result.kpiMapping} />
+            <GapAnalysis gaps={result.gaps} />
+            <FollowUpQuestions followUpQuestions={result.followUpQuestions} />
           </div>
         )}
       </main>
@@ -81,3 +89,4 @@ function App() {
 }
 
 export default App;
+
