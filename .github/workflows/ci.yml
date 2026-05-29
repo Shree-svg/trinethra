@@ -48,6 +48,11 @@ jobs:
         run: |
           docker exec ollama ollama pull llama3.2
 
+      # Wait for model to load
+      - name: Wait for model to be ready
+        run: |
+          sleep 20
+
       - name: Run backend tests
         working-directory: ./backend
         run: npm test -- --passWithNoTests
