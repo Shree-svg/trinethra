@@ -1,0 +1,31 @@
+/* Theme definitions for modern UI
+   Using CSS variables for colors, spacing, and typography */
+:root {
+  --color-primary: hsl(220, 90%, 55%);
+  --color-primary-dark: hsl(220, 90%, 45%);
+  --color-bg: hsl(210, 30%, 12%);
+  --color-surface: hsl(210, 30%, 18%);
+  --color-text: hsl(0, 0%, 95%);
+  --radius: 0.75rem;
+  --shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+  --font-primary: 'Inter', system-ui, sans-serif;
+}
+
+[data-theme="dark"] {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}
+
+/* Global resets */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-primary);
+  line-height: 1.5;
+  background-color: var(--color-bg);
+  color: var(--color-text);
+}

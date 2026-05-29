@@ -76,11 +76,51 @@ function App() {
 
         {result && (
           <div className="dashboard-results">
-            <ScoreCard score={result.score} />
-            <EvidenceList evidence={result.evidence} />
-            <KpiMapping kpiMapping={result.kpiMapping} />
-            <GapAnalysis gaps={result.gaps} />
-            <FollowUpQuestions followUpQuestions={result.followUpQuestions} />
+            {/* If the score is returned as a primitive, convert it to the expected object shape */}
+            <ScoreCard 
+              score={
+                typeof result.score === 'object' && result.score !== null 
+                  ? result.score 
+                  : { value: result.score, label: 'Evaluated', band: 'General Tier', justification: result.evidence || 'See details below' }
+              } 
+            />
+            <EvidenceList 
+              evidence={
+                Array.isArray(result.evidence) 
+                  ? result.evidence 
+                  : (typeof result.evidence === 'string' 
+                      ? [{ quote: 'Key summary', interpretation: result.evidence, signal: 'Neutral' }] 
+                      : [])
+              } 
+            />
+            <KpiMapping 
+              kpiMapping={
+                Array.isArray(result.kpiMapping) 
+                  ? result.kpiMapping 
+                  : (result.kpiMapping && typeof result.kpiMapping === 'object' 
+                      ? Object.entries(result.kpiMapping).map(([kpi, desc]) => ({
+                          kpi,
+                          label: kpi.replace(/_/g, ' '),
+                          evidence: String(desc),
+                          dependencyType: 'personal'
+                        }))
+                      : [])
+              } 
+            />
+            <GapAnalysis 
+              gaps={
+                Array.isArray(result.gaps) 
+                  ? result.gaps.map(g => typeof g === 'string' ? { label: 'Observation Gap', detail: g } : g) 
+                  : []
+              } 
+            />
+            <FollowUpQuestions 
+              followUpQuestions={
+                Array.isArray(result.followUpQuestions) 
+                  ? result.followUpQuestions.map(q => typeof q === 'string' ? { question: q } : q) 
+                  : []
+              } 
+            />
           </div>
         )}
       </main>
