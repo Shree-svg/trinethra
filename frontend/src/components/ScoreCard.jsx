@@ -24,7 +24,7 @@ const AVAILABLE_BIASES = [
 function ScoreCard({ score, onUpdate }) {
   if (!score) return null;
 
-  const { value, label, band, justification, confidence, biasesDetected = [] } = score;
+  const { value, label, band, justification = '', confidence, biasesDetected = [] } = score;
 
   const handleScoreValueChange = (e) => {
     const val = parseInt(e.target.value, 10);
