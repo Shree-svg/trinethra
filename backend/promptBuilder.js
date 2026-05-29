@@ -43,25 +43,54 @@ ${transcript}
 
 ### Instructions:
 1. Carefully analyze the transcript against the 4 Assessment Dimensions and determine the overall score (1 to 10) based on the Rubric.
-2. Provide concrete text evidence from the transcript.
-3. Map relevant observations to any of the 8 KPIs.
+2. Provide concrete text evidence/quotes from the transcript.
+3. Map observations to the 8 KPIs.
 4. Highlight gaps or areas of improvement.
 5. Provide follow-up questions to clarify performance or details.
 6. Return ONLY a valid, raw JSON object. Do not include markdown code block formatting (such as \`\`\`json ... \`\`\`), no prefixing text, and no suffixing text.
 
 ### Required JSON Schema:
 {
-  "score": 5, // (Integer 1-10)
-  "evidence": "String detailing the exact quotes or text evidence supporting the assessment",
-  "kpiMapping": {
-    // Map any of the 8 KPIs to observed values, behaviors, or notes mentioned in the transcript.
-    // e.g., "lead_conversion": "Observation notes", "quality": "Quality check observations"
+  "score": {
+    "value": 7, // (Integer 1-10)
+    "label": "Good / Proficient", // Matching label from rubric
+    "band": "Core Performer", // Band name (e.g. Underperforming, Core Performer, High Performer)
+    "justification": "Detailed justification paragraph summarizing the transcript evaluation.",
+    "confidence": "High", // High, Medium, or Low
+    "biasesDetected": [
+      "Any cognitive/evaluator biases detected in the supervisor's tone or statements (e.g., Recency bias, Halo effect, Leniency bias, or none)"
+    ]
   },
+  "evidence": [
+    {
+      "quote": "Direct quote from the transcript",
+      "signal": "Positive", // Positive, Negative, or Neutral
+      "dimension": "execution", // execution, systems_building, kpi_impact, change_management
+      "layer": "Communication", // Operational layer (e.g., Systems, Comm, Process adherence)
+      "interpretation": "Detailed analysis of what this quote indicates about performance."
+    }
+  ],
+  "kpiMapping": [
+    {
+      "kpi": "lead_conversion", // key identifier from the 8 KPIs
+      "label": "Lead Conversion Rate", // Human-readable label
+      "evidence": "Detailed observation on how they hit or missed this KPI",
+      "dependencyType": "personal" // "system" (tooling/process issue) or "personal" (individual behavior/skill)
+    }
+  ],
   "gaps": [
-    "List of identified gaps or performance deficiencies"
+    {
+      "dimension": "systems_building", // execution, systems_building, kpi_impact, change_management
+      "label": "Lack of Structured CRM Logging", // Title of the gap
+      "detail": "Detailed explanation of the gap and its impact."
+    }
   ],
   "followUpQuestions": [
-    "List of follow-up questions to ask the candidate or agent"
+    {
+      "question": "What is the specific follow-up question to clarify the gap?",
+      "targetGap": "Lack of Structured CRM Logging", // Title of the gap this question addresses
+      "expectedSignal": "What specific indicators or answers to look for in the response"
+    }
   ]
 }
 
