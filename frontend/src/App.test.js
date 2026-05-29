@@ -1,8 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders Trinethra header', () => {
+test('renders Trinethra heading', () => {
   render(<App />);
-  const headerElement = screen.getByText(/Trinethra/i);
-  expect(headerElement).toBeInTheDocument();
+  const headingElement = screen.getByText(/Trinethra/i);
+  expect(headingElement).toBeInTheDocument();
 });
