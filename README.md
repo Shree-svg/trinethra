@@ -19,12 +19,24 @@ Trinethra is a powerful developer‑tool and audit utility that automatically ev
 
 ## 🏗️ Architecture Overview
 
-```mermaid
-graph TD
-    A[React Frontend (Port 3000)] -->|POST /api/analyze| B[Express Backend (Port 5001)]
-    B -->|Prompt + API request| C[Ollama Local LLM (Port 11434)]
-    C -->|Raw Text Completion| B
-    B -->|Clean & Parse JSON| A
+```
+React Frontend (Port 3000)
+|
+| POST /api/analyze
+v
+Express Backend (Port 5001)
+|
+| Prompt + API request
+v
+Ollama Local LLM (Port 11434)
+|
+| Raw JSON response
+v
+Express Backend (Port 5001)
+|
+| Cleaned + Parsed JSON
+v
+React Frontend (Port 3000)
 ```
 
 - **Frontend** – React (Create‑React‑App) with a dark‑themed dashboard for pasting transcripts, viewing scores, and exploring gaps.
