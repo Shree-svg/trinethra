@@ -8,52 +8,62 @@ import FollowUpQuestions from './components/FollowUpQuestions';
 
 const DEMO_SCRIPTS = [
   {
-    label: '🧑‍💻 Software Engineer',
-    text: `Supervisor: Let's talk about your performance this quarter, Rahul. Overall, I think you've done solid work on the authentication module. The code quality was high and you met most deadlines.
+    label: '🚗 Karthik Narayanan (Veerabhadra Auto)',
+    text: `Karthik? Haan, he is good. Very sincere boy. Comes on time, leaves on time — actually he stays late most days, I don't ask him to. He's always on the floor. He's not one of those people who sits in the office and sends emails. He's hands-on.
 
-Rahul: Thanks. I felt good about the auth module too. I struggled a bit with the deployment pipeline though.
+What does he do? He helps me with production tracking. Earlier I used to maintain everything in my head — how many pieces came off each machine, what's the rejection rate, what's pending for dispatch. Now Karthik maintains a sheet. Every evening he updates it and sends it to me on WhatsApp. Very useful. I look at it every morning before the shift meeting.
 
-Supervisor: Yes, that's something I wanted to bring up. There were two missed sprint commitments in April related to CI/CD. I think part of it is you tend to take on too much without flagging blockers early. You need to communicate sooner when something is slipping.
+He also handles a lot of the coordination. When we have quality complaints from Tier 1 — they send an email, sometimes call directly — Karthik takes the first call. He notes down the complaint, talks to the QC team, and gives me a summary. Earlier I used to handle all of this myself. Big relief.
 
-Rahul: Fair point. I sometimes feel like I should figure things out on my own before escalating.
+The new drum brake line — he's been involved from the beginning. He helped set up the machine layout. He did a study on cycle times and suggested we move the deburring station closer to the CNC machines. Good idea. We did it. Saved maybe 10 minutes per batch in material handling.
 
-Supervisor: That's a good instinct, but there's a balance. I'd rather hear about a problem on day two than discover it on day ten. On the positive side, your mentorship of the junior devs has been exceptional. Three people specifically mentioned you in their feedback. That kind of leadership doesn't go unnoticed.
+Any complaints? No, not really. Sometimes he asks too many questions — like he wants to understand everything before doing it. Sometimes in a factory you just need to do it and learn by doing. But this is a minor thing.
 
-Rahul: That means a lot. I enjoy helping others grow.
+One thing — he doesn't really push back. If I tell him to do something, he does it. Even if it's not the best way. I wish he would tell me sometimes, 'Sir, I think we should do it differently.' But maybe he's still new. He'll get there.
 
-Supervisor: One more thing — I'd like to see you take more initiative in architecture discussions. You have strong opinions but you hold back in meetings. I think the team would benefit from hearing your perspective more often.`,
+Overall I'm happy. He's become part of the team. The workers on the floor know him. He speaks to them in Marathi — that helps. If you asked them, they would say he's one of us.`,
   },
   {
-    label: '🧠 Psychology Intern',
-    text: `Supervisor: Priya, we're at the halfway mark of your internship, so I wanted to check in on how things are going. How are you feeling about the client interactions so far?
+    label: '🧵 Meena Krishnamurthy (Lakshmi Textiles)',
+    text: `Meena. Look, she is smart. No doubt. She understands things quickly. But I have some concerns.
 
-Priya: Honestly, a bit nervous still. I feel like I freeze up sometimes when a client says something unexpected.
+She spends too much time on her laptop. In a garment factory, the action is on the floor — cutting, stitching, finishing, packing. If you're not on the floor, you're not seeing what's happening. I tell her — go to the floor, talk to the line supervisors, see what's stuck. She goes, but after 30 minutes she's back at her desk typing.
 
-Supervisor: That's very normal at this stage. What I've noticed is that your case notes are actually quite thoughtful — you pick up on nuances that even experienced clinicians miss. The gap isn't in your understanding, it's in your confidence during live sessions.
+She made some Excel sheets. Fine. One is an order tracker — which order is at which stage, what's the expected completion date. Another one tracks rejection percentages by line. She showed it to me last week in a meeting. The data was correct, I'll give her that. She found that Line 3 has 14% rejection compared to 6% average on the other lines. Nobody had quantified this before.
 
-Priya: That's reassuring to hear. I've been journaling after each session to process what happened.
+But here's my problem. I showed this to my production manager and he said, 'So? We know Line 3 has issues. The operators are new.' So the data is correct but the people on the floor already know. Meena is telling us what we already know, just in Excel format.
 
-Supervisor: That's a great practice. One thing I'd suggest is role-playing difficult scenarios with me before sessions. It might help bridge that gap between your analytical skills and in-the-moment responses. I also want to flag that your boundaries with the adolescent client in Room 3 need some work. You stayed 20 minutes past the session last Tuesday.
+She also wrote something she calls an 'SOP' for the cutting section. Step-by-step process for how to handle a new order — from fabric receiving to pattern matching to cut-plan approval. I looked at it. It's well-written. But nobody uses it. She pinned it on the wall near the cutting master's station. It's still there. Nobody reads it.
 
-Priya: I felt like she was about to open up about something important and I didn't want to cut her off.
+I told her — the problem is not that we don't have a process. The problem is that the cutting master gets 5 phone calls during a changeover and loses focus. An SOP on the wall doesn't solve that. She needs to understand the floor reality, not just write documents.
 
-Supervisor: I understand that impulse, but maintaining the frame is part of the therapeutic work. Ending on time teaches clients that the space is safe and consistent. Let's work on closing techniques next week.`,
+On the positive side — she did something useful with the dispatch team. She started tracking which orders are at risk of missing the ship date and sending me a daily email by 11 AM. Before this, I would find out about delays at 4 PM when the container was supposed to leave. Now I know by 11 AM and can push. Two weeks ago we saved a shipment to Decathlon because of this. That was good.
+
+My worry is that she's building things in Excel that nobody asked for and nobody uses. I need someone who solves problems on the floor, not someone who makes beautiful sheets in the office.
+
+Is she failing? No. She's trying. She's just not connecting her work to what actually matters here. If she learns to do that, she could be very good.`,
   },
   {
-    label: '📊 Marketing Manager',
-    text: `Supervisor: Ananya, let's review Q1. The product launch campaign exceeded our targets by 30%, which is outstanding. The social media strategy you designed was the primary driver.
+    label: '🥛 Anil Menon (Prabhat Foods)',
+    text: `Anil is my right hand. I don't know how we managed before him.
 
-Ananya: Thank you. The team really pulled together on that one.
+Every morning he's in my office at 8:15 with the day's plan — what's in production, what's getting dispatched, what needs my attention. He prioritizes. Before Anil, I used to walk into the factory and get hit with 10 problems at once. Now he filters. He tells me — these 3 need your decision, these 7 I'll handle.
 
-Supervisor: I appreciate you crediting the team, but I want to acknowledge your individual contribution too. The influencer partnership framework you built is something we're now rolling out to other regions. That said, I have some concerns about the email marketing performance. Open rates dropped 15% compared to last quarter.
+He handles the retailer complaints. If a retailer calls about expired stock or taste issues, Anil takes the call, logs it, coordinates with the production team to pull the batch records, and gets back to the retailer within 24 hours. Our complaint closure time has gone from 5 days to under 2 days since he started.
 
-Ananya: I noticed that too. I think our segmentation needs refreshing — we've been using the same audience buckets for six months.
+He manages the daily production meeting. I used to run it — 45 minutes, no agenda, everyone talks about everything. Anil took it over, made a structure, now it's 20 minutes. He keeps it focused.
 
-Supervisor: Agreed. I'd like you to own a segmentation audit by end of next month. The other area I want to discuss is your relationship with the sales team. There have been a couple of instances where campaign timelines weren't communicated clearly, and sales felt blindsided.
+He also coordinates with our distributor in Pune and the one in Aurangabad. He tracks their stock levels, tells dispatch when to send the next shipment. Earlier my dispatch supervisor would wait until the distributor called and said 'we're out of stock.' Now Anil tracks it proactively.
 
-Ananya: I wasn't aware it was that serious. I'll set up a weekly sync with their team lead.
+I'll tell you a story. Three weeks ago, we had a power failure at 2 AM. The cold chain broke. Anil wasn't there — it was the night shift. But the night supervisor called him. Anil came to the factory at 3 AM, personally checked the temperature logs, identified which batches were compromised, held them from dispatch, and had the QC reports ready by the time I arrived at 8 AM. No compromised product reached the market. Last year, a similar incident happened and we had to recall 200 cases of paneer from Reliance Fresh. This time — zero impact.
 
-Supervisor: That would help a lot. Last thing — I'm recommending you for the leadership development program. I think you're ready for it. You have the strategic thinking, you just need more exposure to cross-functional stakeholder management.`,
+Does he have areas to improve? I'm sure he does, but honestly I can't think of any right now. He's so helpful. He takes so much off my plate. I feel like I can finally focus on the business instead of firefighting.
+
+My production manager — Raghav — he's been here 8 years. He's good at running the machines but he doesn't plan. Anil has started doing Raghav's planning for him. Raghav gives Anil the list of orders and Anil creates the production schedule. I know this is not ideal — Raghav should do his own planning. But it works, so I haven't said anything.
+
+One more thing — Anil writes very well. His reports to me are clear. When I forward them to my accountant or my distributor, they understand. He has a professional quality that we don't usually see at this level.
+
+If I could keep him for 2 years instead of 6 months, I would.`,
   },
 ];
 
@@ -63,6 +73,7 @@ function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [activeDemo, setActiveDemo] = useState(null);
+  const [finalizedReport, setFinalizedReport] = useState(null);
 
   const handleRunAnalysis = async () => {
     if (!transcript.trim()) return;
@@ -70,6 +81,7 @@ function App() {
     setLoading(true);
     setError(null);
     setResult(null);
+    setFinalizedReport(null);
 
     try {
       const response = await fetch('http://localhost:5001/api/analyze', {
@@ -93,6 +105,64 @@ function App() {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleUpdateScore = (updatedScore) => {
+    setFinalizedReport(null);
+    setResult((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        score: {
+          ...prev.score,
+          ...updatedScore,
+        },
+      };
+    });
+  };
+
+  const handleUpdateEvidence = (updatedEvidence) => {
+    setFinalizedReport(null);
+    setResult((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        evidence: updatedEvidence,
+      };
+    });
+  };
+
+  const handleUpdateKpi = (updatedKpi) => {
+    setFinalizedReport(null);
+    setResult((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        kpiMapping: updatedKpi,
+      };
+    });
+  };
+
+  const handleUpdateGaps = (updatedGaps) => {
+    setFinalizedReport(null);
+    setResult((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        gaps: updatedGaps,
+      };
+    });
+  };
+
+  const handleUpdateQuestions = (updatedQuestions) => {
+    setFinalizedReport(null);
+    setResult((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        followUpQuestions: updatedQuestions,
+      };
+    });
   };
 
   return (
@@ -160,51 +230,49 @@ function App() {
 
         {result && (
           <div className="dashboard-results">
-            {/* If the score is returned as a primitive, convert it to the expected object shape */}
             <ScoreCard 
-              score={
-                typeof result.score === 'object' && result.score !== null 
-                  ? result.score 
-                  : { value: result.score, label: 'Evaluated', band: 'General Tier', justification: result.evidence || 'See details below' }
-              } 
+              score={result.score} 
+              onUpdate={handleUpdateScore}
             />
             <EvidenceList 
-              evidence={
-                Array.isArray(result.evidence) 
-                  ? result.evidence 
-                  : (typeof result.evidence === 'string' 
-                      ? [{ quote: 'Key summary', interpretation: result.evidence, signal: 'Neutral' }] 
-                      : [])
-              } 
+              evidence={result.evidence} 
+              onUpdate={handleUpdateEvidence}
             />
             <KpiMapping 
-              kpiMapping={
-                Array.isArray(result.kpiMapping) 
-                  ? result.kpiMapping 
-                  : (result.kpiMapping && typeof result.kpiMapping === 'object' 
-                      ? Object.entries(result.kpiMapping).map(([kpi, desc]) => ({
-                          kpi,
-                          label: kpi.replace(/_/g, ' '),
-                          evidence: String(desc),
-                          dependencyType: 'personal'
-                        }))
-                      : [])
-              } 
+              kpiMapping={result.kpiMapping} 
+              onUpdate={handleUpdateKpi}
             />
             <GapAnalysis 
-              gaps={
-                Array.isArray(result.gaps) 
-                  ? result.gaps.map(g => typeof g === 'string' ? { label: 'Observation Gap', detail: g } : g) 
-                  : []
-              } 
+              gaps={result.gaps} 
+              onUpdate={handleUpdateGaps}
             />
             <FollowUpQuestions 
-              followUpQuestions={
-                Array.isArray(result.followUpQuestions) 
-                  ? result.followUpQuestions.map(q => typeof q === 'string' ? { question: q } : q) 
-                  : []
-              } 
+              followUpQuestions={result.followUpQuestions} 
+              onUpdate={handleUpdateQuestions}
             />
+
+            <div className="finalize-section">
+              <button className="finalize-btn" onClick={() => setFinalizedReport(JSON.stringify(result, null, 2))}>
+                Finalize & Export Analysis
+              </button>
+              {finalizedReport && (
+                <div className="export-container">
+                  <div className="export-header">
+                    <h4>Finalized Audit Report (JSON)</h4>
+                    <button 
+                      className="copy-btn" 
+                      onClick={() => {
+                        navigator.clipboard.writeText(finalizedReport);
+                        alert('Report copied to clipboard!');
+                      }}
+                    >
+                      Copy to Clipboard
+                    </button>
+                  </div>
+                  <pre className="export-pre">{finalizedReport}</pre>
+                </div>
+              )}
+            </div>
           </div>
         )}
       </main>
