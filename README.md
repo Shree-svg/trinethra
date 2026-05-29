@@ -10,14 +10,14 @@ Trinethra runs a three-tier system:
 
 ```mermaid
 graph TD
-  A[React Frontend: Port 3000] -->|POST /api/analyze| B[Express Backend: Port 5000]
+  A[React Frontend: Port 3000] -->|POST /api/analyze| B[Express Backend: Port 5001]
   B -->|Prompt Building & API Request| C[Ollama local LLM: Port 11434]
   C -->|Raw Text Completion| B
   B -->|Cleans & Parses JSON Response| A
 ```
 
 - **Frontend (Port 3000)**: Built on React (using Create-React-App). Provides an interactive, dark-themed dashboard to paste transcripts, view numeric scores, study highlighted evidence, map KPI behaviors, explore gap analyses, and review follow-up pointer questions.
-- **Backend (Port 5000)**: Express server that manages prompts and routes requests to the LLM. It features robust markdown-stripping code, JSON cleaning mechanisms, and automatic query retries to ensure response integrity.
+- **Backend (Port 5001)**: Express server that manages prompts and routes requests to the LLM. It features robust markdown-stripping code, JSON cleaning mechanisms, and automatic query retries to ensure response integrity.
 - **Local LLM (Port 11434)**: Serves a local instance of Ollama running `llama3.2` to process high-fidelity assessments.
 
 ---

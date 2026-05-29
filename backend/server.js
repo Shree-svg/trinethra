@@ -3,7 +3,7 @@ const cors = require('cors');
 const analyzeRouter = require('./analyzeRoute');
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 5001;
 
 // Enable CORS
 app.use(cors());
