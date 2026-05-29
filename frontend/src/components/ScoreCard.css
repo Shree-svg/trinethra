@@ -142,3 +142,122 @@
   font-size: 0.95rem;
   line-height: 1.5;
 }
+
+.section-title-main {
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  color: #94a3b8;
+  letter-spacing: 1.5px;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.badge-flex {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-bottom: 0.5rem;
+}
+
+.text-badge-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+}
+
+.score-label-display {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: #ffffff;
+}
+
+.score-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  padding-bottom: 1.25rem;
+}
+
+.score-control-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.input-label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  color: #64748b;
+  letter-spacing: 1px;
+  font-weight: 700;
+}
+
+.score-select {
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  border-radius: 8px;
+  color: #ffffff;
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+  outline: none;
+  transition: border-color 0.2s;
+  cursor: pointer;
+}
+
+.score-select:focus {
+  border-color: #6366f1;
+}
+
+.score-justification-textarea {
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  border-radius: 10px;
+  color: #ffffff;
+  padding: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  outline: none;
+  transition: border-color 0.2s;
+  resize: vertical;
+}
+
+.score-justification-textarea:focus {
+  border-color: #6366f1;
+}
+
+.biases-checkbox-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 0.75rem;
+}
+
+.bias-checkbox-card {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  background: #12121a;
+  border: 1px solid #2a2a3a;
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  color: #94a3b8;
+  cursor: pointer;
+  user-select: none;
+  transition: all 0.2s ease;
+}
+
+.bias-checkbox-card:hover {
+  background: rgba(99, 102, 241, 0.05);
+  border-color: rgba(99, 102, 241, 0.3);
+}
+
+.bias-checkbox-card.active {
+  background: rgba(245, 158, 11, 0.1);
+  border-color: rgba(245, 158, 11, 0.4);
+  color: #fbbf24;
+}
+
+.bias-checkbox-card input {
+  cursor: pointer;
+  accent-color: #fbbf24;
+}

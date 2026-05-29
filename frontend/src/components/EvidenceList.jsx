@@ -1,57 +1,134 @@
 import React from 'react';
 import './EvidenceList.css';
 
-/**
- * EvidenceList component to display array of text observations from transcript evaluation.
- * @param {Object} props
- * @param {Array} props.evidence - List of evidence objects
- * @param {string} props.evidence[].quote - The raw transcript excerpt quote
- * @param {string} props.evidence[].signal - Positive, Negative, or Neutral signal
- * @param {string} props.evidence[].dimension - One of the assessment dimensions
- * @param {string} props.evidence[].layer - Specific operational layer target
- * @param {string} props.evidence[].interpretation - What the quote signifies
- */
-function EvidenceList({ evidence = [] }) {
-  if (!evidence || evidence.length === 0) {
-    return (
-      <div className="no-evidence-state">
-        No specific evidence observations registered.
-      </div>
-    );
-  }
+const DIMENSIONS = [
+  { id: 'execution', label: 'Driving Execution' },
+  { id: 'systems_building', label: 'Building Systems' },
+  { id: 'kpi_impact', label: 'KPI Impact' },
+  { id: 'change_management', label: 'Change Management' }
+];
+
+const SIGNALS = ['Positive', 'Negative', 'Neutral'];
+
+function EvidenceList({ evidence = [], onUpdate }) {
+  const handleChange = (index, field, value) => {
+    const updated = [...evidence];
+    updated[index] = { ...updated[index], [field]: value };
+    onUpdate(updated);
+  };
+
+  const handleDelete = (index) => {
+    const updated = evidence.filter((_, idx) => idx !== index);
+    onUpdate(updated);
+  };
+
+  const handleAdd = () => {
+    const newItem = {
+      quote: '',
+      signal: 'Neutral',
+      dimension: 'execution',
+      layer: 'General',
+      interpretation: ''
+    };
+    onUpdate([...evidence, newItem]);
+  };
 
   return (
     <div className="evidence-list-container">
-      <h3 className="evidence-title">Audited Evidence & Excerpts</h3>
-      <div className="evidence-grid">
-        {evidence.map((item, idx) => {
-          const { quote, signal, dimension, layer, interpretation } = item;
-          const signalClass = `signal-tag signal-${(signal || 'neutral').toLowerCase()}`;
+      <div className="evidence-header-flex">
+        <h3 className="evidence-title">Audited Evidence & Excerpts</h3>
+        <button className="add-item-btn" onClick={handleAdd}>
+          + Add Evidence
+        </button>
+      </div>
 
-          return (
-            <div className="evidence-item-card" key={idx}>
-              <div className="evidence-card-meta">
-                <span className={signalClass}>{signal}</span>
-                <div className="label-group">
-                  {dimension && <span className="meta-label dimension-label">{dimension}</span>}
-                  {layer && <span className="meta-label layer-label">{layer}</span>}
+      {evidence.length === 0 ? (
+        <div className="no-evidence-state">
+          No specific evidence observations registered. Click "+ Add Evidence" to add one.
+        </div>
+      ) : (
+        <div className="evidence-grid-edit">
+          {evidence.map((item, idx) => {
+            const { quote, signal, dimension, layer, interpretation } = item;
+
+            return (
+              <div className="evidence-item-card-edit" key={idx}>
+                <div className="evidence-card-actions">
+                  <span className="item-number">Evidence #{idx + 1}</span>
+                  <button className="delete-item-btn" onClick={() => handleDelete(idx)} title="Delete item">
+                    Delete
+                  </button>
+                </div>
+
+                <div className="evidence-field-row">
+                  <div className="field-group flex-1">
+                    <label className="input-label">Direct Quote / Excerpt</label>
+                    <textarea
+                      value={quote}
+                      onChange={(e) => handleChange(idx, 'quote', e.target.value)}
+                      className="edit-textarea"
+                      rows={2}
+                      placeholder="Paste exact quote here..."
+                    />
+                  </div>
+                </div>
+
+                <div className="evidence-field-row grid-3">
+                  <div className="field-group">
+                    <label className="input-label">Signal</label>
+                    <select
+                      value={signal || 'Neutral'}
+                      onChange={(e) => handleChange(idx, 'signal', e.target.value)}
+                      className="edit-select"
+                    >
+                      {SIGNALS.map(sig => (
+                        <option key={sig} value={sig}>{sig}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field-group">
+                    <label className="input-label">Dimension</label>
+                    <select
+                      value={dimension || 'execution'}
+                      onChange={(e) => handleChange(idx, 'dimension', e.target.value)}
+                      className="edit-select"
+                    >
+                      {DIMENSIONS.map(dim => (
+                        <option key={dim.id} value={dim.id}>{dim.label}</option>
+                      ))}
+                    </select>
+                  </div>
+
+                  <div className="field-group">
+                    <label className="input-label">Operational Layer</label>
+                    <input
+                      type="text"
+                      value={layer || ''}
+                      onChange={(e) => handleChange(idx, 'layer', e.target.value)}
+                      className="edit-input"
+                      placeholder="e.g. Systems Integration"
+                    />
+                  </div>
+                </div>
+
+                <div className="evidence-field-row">
+                  <div className="field-group flex-1">
+                    <label className="input-label">Psychological / Operational Interpretation</label>
+                    <textarea
+                      value={interpretation}
+                      onChange={(e) => handleChange(idx, 'interpretation', e.target.value)}
+                      className="edit-textarea"
+                      rows={2}
+                      placeholder="What does this behavior indicate? Classify Layer 1 vs Layer 2..."
+                    />
+                  </div>
                 </div>
               </div>
-
-              <blockquote className="evidence-quote">
-                “{quote}”
-              </blockquote>
-
-              {interpretation && (
-                <div className="evidence-interpretation">
-                  <span className="interpretation-header">Interpretation:</span>
-                  <p className="interpretation-body">{interpretation}</p>
-                </div>
-              )}
-            </div>
-          );
-        })}
-      </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
