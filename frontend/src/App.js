@@ -73,7 +73,6 @@ function App() {
   const [result, setResult] = useState(null);
   const [error, setError] = useState(null);
   const [activeDemo, setActiveDemo] = useState(null);
-  const [finalizedReport, setFinalizedReport] = useState(null);
 
   const handleRunAnalysis = async () => {
     if (!transcript.trim()) return;
@@ -81,7 +80,6 @@ function App() {
     setLoading(true);
     setError(null);
     setResult(null);
-    setFinalizedReport(null);
 
     try {
       const response = await fetch('http://localhost:5001/api/analyze', {
@@ -108,7 +106,6 @@ function App() {
   };
 
   const handleUpdateScore = (updatedScore) => {
-    setFinalizedReport(null);
     setResult((prev) => {
       if (!prev) return prev;
       return {
@@ -122,7 +119,6 @@ function App() {
   };
 
   const handleUpdateEvidence = (updatedEvidence) => {
-    setFinalizedReport(null);
     setResult((prev) => {
       if (!prev) return prev;
       return {
@@ -133,7 +129,6 @@ function App() {
   };
 
   const handleUpdateKpi = (updatedKpi) => {
-    setFinalizedReport(null);
     setResult((prev) => {
       if (!prev) return prev;
       return {
@@ -144,7 +139,6 @@ function App() {
   };
 
   const handleUpdateGaps = (updatedGaps) => {
-    setFinalizedReport(null);
     setResult((prev) => {
       if (!prev) return prev;
       return {
@@ -155,7 +149,6 @@ function App() {
   };
 
   const handleUpdateQuestions = (updatedQuestions) => {
-    setFinalizedReport(null);
     setResult((prev) => {
       if (!prev) return prev;
       return {
@@ -252,44 +245,23 @@ function App() {
             />
 
             <div className="finalize-section">
-              <button className="finalize-btn" onClick={() => setFinalizedReport(JSON.stringify(result, null, 2))}>
+              <button 
+                className="finalize-btn" 
+                onClick={() => {
+                  const jsonReport = JSON.stringify(result, null, 2);
+                  const blob = new Blob([jsonReport], { type: 'application/json' });
+                  const url = URL.createObjectURL(blob);
+                  const link = document.createElement('a');
+                  link.href = url;
+                  link.download = `audit-report-${new Date().getTime()}.json`;
+                  document.body.appendChild(link);
+                  link.click();
+                  document.body.removeChild(link);
+                  URL.revokeObjectURL(url);
+                }}
+              >
                 Finalize & Export Analysis
               </button>
-              {finalizedReport && (
-                <div className="export-container">
-                  <div className="export-header">
-                    <h4>Finalized Audit Report (JSON)</h4>
-                    <button 
-                      className="copy-btn" 
-                      onClick={async () => {
-                        try {
-                          if (navigator?.clipboard?.writeText) {
-                            await navigator.clipboard.writeText(finalizedReport);
-                            alert('Report copied to clipboard!');
-                          } else {
-                            throw new Error('Clipboard API not available');
-                          }
-                        } catch (err) {
-                          const textArea = document.createElement("textarea");
-                          textArea.value = finalizedReport;
-                          document.body.appendChild(textArea);
-                          textArea.select();
-                          try {
-                            document.execCommand('copy');
-                            alert('Report copied to clipboard (fallback)!');
-                          } catch (e) {
-                            alert('Failed to copy. Please manually copy the text below.');
-                          }
-                          document.body.removeChild(textArea);
-                        }
-                      }}
-                    >
-                      Copy to Clipboard
-                    </button>
-                  </div>
-                  <pre className="export-pre">{finalizedReport}</pre>
-                </div>
-              )}
             </div>
           </div>
         )}
