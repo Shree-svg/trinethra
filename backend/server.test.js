@@ -56,7 +56,7 @@ describe('Trinethra API Server Tests', () => {
       expect(response.body).toHaveProperty('kpiMapping');
       expect(response.body).toHaveProperty('gaps');
       expect(response.body).toHaveProperty('followUpQuestions');
-    }, 600000);
+    });
 
     it('should retry and succeed if the first Ollama call fails', async () => {
       if (!ollamaAvailable) {
@@ -67,7 +67,7 @@ describe('Trinethra API Server Tests', () => {
       const response = await request(app).post('/api/analyze').send({ transcript: demoTranscript });
       expect(response.status).toBe(200);
       expect(response.body).toHaveProperty('score');
-    }, 600000);
+    });
 
     it('should return 500 if all Ollama retries fail', async () => {
       if (!ollamaAvailable) {
@@ -82,6 +82,6 @@ describe('Trinethra API Server Tests', () => {
       } else {
         expect(response.body).toHaveProperty('error');
       }
-    }, 600000);
+    });
   });
 });
