@@ -9,6 +9,11 @@ import FollowUpQuestions from './components/FollowUpQuestions';
 // Delay before cleanup to ensure download initiates in all browsers
 const DOWNLOAD_CLEANUP_DELAY_MS = 100;
 
+// Helper function to generate human-readable timestamp
+const generateTimestamp = () => {
+  return new Date().toISOString().replace(/[:.]/g, '-').split('.')[0];
+};
+
 const DEMO_SCRIPTS = [
   {
     label: '🚗 Karthik Narayanan (Veerabhadra Auto)',
@@ -256,12 +261,18 @@ function App() {
                   const url = URL.createObjectURL(blob);
                   const link = document.createElement('a');
                   link.href = url;
-                  link.download = `audit-report-${Date.now()}.json`;
+                  link.download = `audit-report-${generateTimestamp()}.json`;
                   document.body.appendChild(link);
                   link.click();
                   setTimeout(() => {
-                    document.body.removeChild(link);
-                    URL.revokeObjectURL(url);
+                    try {
+                      if (link.parentNode === document.body) {
+                        document.body.removeChild(link);
+                      }
+                      URL.revokeObjectURL(url);
+                    } catch (err) {
+                      console.error('Error cleaning up download resources:', err);
+                    }
                   }, DOWNLOAD_CLEANUP_DELAY_MS);
                 }}
               >
