@@ -261,9 +261,27 @@ function App() {
                     <h4>Finalized Audit Report (JSON)</h4>
                     <button 
                       className="copy-btn" 
-                      onClick={() => {
-                        navigator.clipboard.writeText(finalizedReport);
-                        alert('Report copied to clipboard!');
+                      onClick={async () => {
+                        try {
+                          if (navigator?.clipboard?.writeText) {
+                            await navigator.clipboard.writeText(finalizedReport);
+                            alert('Report copied to clipboard!');
+                          } else {
+                            throw new Error('Clipboard API not available');
+                          }
+                        } catch (err) {
+                          const textArea = document.createElement("textarea");
+                          textArea.value = finalizedReport;
+                          document.body.appendChild(textArea);
+                          textArea.select();
+                          try {
+                            document.execCommand('copy');
+                            alert('Report copied to clipboard (fallback)!');
+                          } catch (e) {
+                            alert('Failed to copy. Please manually copy the text below.');
+                          }
+                          document.body.removeChild(textArea);
+                        }
                       }}
                     >
                       Copy to Clipboard
