@@ -49,9 +49,6 @@ function KpiMapping({ kpiMapping = [], onUpdate }) {
     <div className="kpi-mapping-container">
       <div className="kpi-header-flex">
         <h3 className="kpi-section-title">KPI Evaluation & Dependencies</h3>
-        <button className="add-kpi-btn" onClick={handleAdd}>
-          + Add KPI
-        </button>
       </div>
 
       {kpiMapping.length === 0 ? (
@@ -67,9 +64,6 @@ function KpiMapping({ kpiMapping = [], onUpdate }) {
               <div className="kpi-card-edit" key={idx}>
                 <div className="kpi-card-header-edit">
                   <span className="kpi-number">KPI #{idx + 1}</span>
-                  <button className="delete-kpi-btn" onClick={() => handleDelete(idx)}>
-                    Delete
-                  </button>
                 </div>
 
                 <div className="kpi-field-row">
@@ -77,7 +71,7 @@ function KpiMapping({ kpiMapping = [], onUpdate }) {
                     <label className="input-label">Select KPI</label>
                     <select
                       value={kpi || 'quality'}
-                      onChange={(e) => handleChange(idx, 'kpi', e.target.value)}
+                      disabled
                       className="edit-select"
                     >
                       {AVAILABLE_KPIS.map(k => (
@@ -90,7 +84,7 @@ function KpiMapping({ kpiMapping = [], onUpdate }) {
                     <label className="input-label">Dependency Type</label>
                     <select
                       value={dependencyType || 'personal'}
-                      onChange={(e) => handleChange(idx, 'dependencyType', e.target.value)}
+                      disabled
                       className="edit-select"
                     >
                       <option value="system">System Dependency (Tool/Process)</option>
@@ -104,7 +98,7 @@ function KpiMapping({ kpiMapping = [], onUpdate }) {
                     <label className="input-label">Mapped Evidence from Transcript</label>
                     <textarea
                       value={evidence}
-                      onChange={(e) => handleChange(idx, 'evidence', e.target.value)}
+                      readOnly
                       className="edit-textarea"
                       rows={2}
                       placeholder="e.g. Saved 10 minutes in deburring batch cycle time..."

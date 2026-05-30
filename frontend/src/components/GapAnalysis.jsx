@@ -33,9 +33,6 @@ function GapAnalysis({ gaps = [], onUpdate }) {
     <div className="gap-analysis-container">
       <div className="gap-header-flex">
         <h3 className="gap-section-title">Gap Analysis & Interventions</h3>
-        <button className="add-gap-btn" onClick={handleAdd}>
-          + Add Gap
-        </button>
       </div>
 
       {gaps.length === 0 ? (
@@ -51,9 +48,6 @@ function GapAnalysis({ gaps = [], onUpdate }) {
               <div className="gap-card-edit" key={idx}>
                 <div className="gap-card-header-edit">
                   <span className="gap-number">Gap #{idx + 1}</span>
-                  <button className="delete-gap-btn" onClick={() => handleDelete(idx)}>
-                    Delete
-                  </button>
                 </div>
 
                 <div className="gap-field-row grid-2">
@@ -62,7 +56,7 @@ function GapAnalysis({ gaps = [], onUpdate }) {
                     <input
                       type="text"
                       value={label || ''}
-                      onChange={(e) => handleChange(idx, 'label', e.target.value)}
+                      readOnly
                       className="edit-input"
                       placeholder="e.g. Change Management Gap"
                     />
@@ -72,7 +66,7 @@ function GapAnalysis({ gaps = [], onUpdate }) {
                     <label className="input-label">Dimension</label>
                     <select
                       value={dimension || 'change_management'}
-                      onChange={(e) => handleChange(idx, 'dimension', e.target.value)}
+                      disabled
                       className="edit-select"
                     >
                       {DIMENSIONS.map(dim => (
@@ -87,7 +81,7 @@ function GapAnalysis({ gaps = [], onUpdate }) {
                     <label className="input-label">Gap Details & Impact Description</label>
                     <textarea
                       value={detail}
-                      onChange={(e) => handleChange(idx, 'detail', e.target.value)}
+                      readOnly
                       className="edit-textarea"
                       rows={2}
                       placeholder="Describe what was missing from the transcript and what is the impact..."

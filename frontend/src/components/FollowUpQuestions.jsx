@@ -26,9 +26,6 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
     <div className="followup-container">
       <div className="followup-header-flex">
         <h3 className="followup-title">Clarifying Follow-Up Questions</h3>
-        <button className="add-question-btn" onClick={handleAdd}>
-          + Add Question
-        </button>
       </div>
 
       {followUpQuestions.length === 0 ? (
@@ -45,9 +42,6 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
               <div className="followup-card-edit" key={idx}>
                 <div className="followup-card-header-edit">
                   <span className="question-number">Question #{idx + 1}</span>
-                  <button className="delete-question-btn" onClick={() => handleDelete(idx)}>
-                    Delete
-                  </button>
                 </div>
 
                 <div className="followup-field-row">
@@ -56,7 +50,7 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
                     <input
                       type="text"
                       value={targetGap || ''}
-                      onChange={(e) => handleChange(idx, 'targetGap', e.target.value)}
+                      readOnly
                       className="edit-input"
                       placeholder="e.g. Systems Building Gap"
                     />
@@ -68,7 +62,7 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
                     <label className="input-label">Question Text</label>
                     <textarea
                       value={question}
-                      onChange={(e) => handleChange(idx, 'question', e.target.value)}
+                      readOnly
                       className="edit-textarea"
                       rows={2}
                       placeholder="Write the follow-up question..."
@@ -81,16 +75,7 @@ function FollowUpQuestions({ followUpQuestions = [], onUpdate }) {
                     <label className="input-label">Evaluation Pointer (What to listen for in reply)</label>
                     <textarea
                       value={signalText}
-                      onChange={(e) => {
-                        // Update both properties to maintain schema compatibility
-                        const updated = [...followUpQuestions];
-                        updated[idx] = {
-                          ...updated[idx],
-                          lookingFor: e.target.value,
-                          expectedSignal: e.target.value
-                        };
-                        onUpdate(updated);
-                      }}
+                      readOnly
                       className="edit-textarea"
                       rows={2}
                       placeholder="What signals or details to look for in the supervisor's response..."
