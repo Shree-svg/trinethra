@@ -6,6 +6,9 @@ import KpiMapping from './components/KpiMapping';
 import GapAnalysis from './components/GapAnalysis';
 import FollowUpQuestions from './components/FollowUpQuestions';
 
+// Delay before cleanup to ensure download initiates in all browsers
+const DOWNLOAD_CLEANUP_DELAY_MS = 100;
+
 const DEMO_SCRIPTS = [
   {
     label: '🚗 Karthik Narayanan (Veerabhadra Auto)',
@@ -259,7 +262,7 @@ function App() {
                   setTimeout(() => {
                     document.body.removeChild(link);
                     URL.revokeObjectURL(url);
-                  }, 100);
+                  }, DOWNLOAD_CLEANUP_DELAY_MS);
                 }}
               >
                 Finalize & Export Analysis
