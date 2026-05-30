@@ -19,31 +19,61 @@ Trinethra is a powerful developer‑tool and audit utility that automatically ev
 
 ## 🏗️ Architecture Overview
 
-```
-React Frontend (Port 3000)
-|
-| POST /api/analyze
-v
-Express Backend (Port 5001)
-|
-| Prompt + API request
-v
-Ollama Local LLM (Port 11434)
-|
-| Raw JSON response
-v
-Express Backend (Port 5001)
-|
-| Cleaned + Parsed JSON
-v
-React Frontend (Port 3000)
+The system is built on a decoupled, three-tier architecture that ensures responsive UI updates while handling slow, compute-intensive LLM inference in the background.
+
+```mermaid
+sequenceDiagram
+    participant User
+    participant UI as React Frontend (Port 3000)
+    participant API as Node.js Backend (Port 5001)
+    participant LLM as Ollama / Llama 3.2 (Port 11434)
+
+    User->>UI: Submit Supervisor Transcript
+    UI->>API: POST /api/analyze { transcript }
+    
+    rect rgb(20, 40, 60)
+        Note right of API: Data Processing Pipeline
+        API->>API: 1. Build context-aware prompt
+    end
+
+    API->>LLM: POST /api/generate { prompt }
+    LLM-->>API: Raw JSON string (Markdown enclosed)
+    
+    rect rgb(20, 40, 60)
+        Note right of API: Recovery & Validation
+        API->>API: 2. cleanLLMResponse() (strip markdown/backticks)
+        API->>API: 3. JSON.parse(cleanedText)
+    end
+    
+    alt JSON parsing succeeds
+        API-->>UI: 200 OK (Structured JSON)
+    else JSON parsing fails
+        API->>LLM: Retry generation (max 2 attempts)
+        LLM-->>API: New Raw JSON string
+        API-->>UI: 200 OK or 500 Error
+    end
+    
+    UI-->>User: Render interactive dashboard components
 ```
 
-- **Frontend** – React (Create‑React‑App) with a dark‑themed dashboard for pasting transcripts, viewing scores, and exploring gaps.
-- **Backend** – Express server that builds prompts, contacts Ollama, sanitises responses, and returns structured JSON.
-- **Local LLM** – Ollama running the `llama3.2` model for high‑fidelity assessments.
+### Technical Components
 
----
+1. **Presentation Layer (Frontend)**
+   - Built with **React** and standard CSS (no heavy UI frameworks) for high performance.
+   - Designed with an immutable local state: the transcript area becomes read-only upon submission to ensure the visualised analysis accurately maps to the exact text provided.
+   - Modular component structure (`ScoreCard`, `EvidenceList`, `GapAnalysis`, etc.) processing nested JSON responses.
+
+2. **Application Layer (Backend)**
+   - A lightweight **Express / Node.js** service that handles prompt engineering and sanitisation.
+   - **Fault-Tolerant Parsing**: LLMs frequently inject conversational text or markdown fences (e.g., ` ```json `) into JSON endpoints. The backend uses targeted regex cleaning and automatic retry loops to guarantee valid JSON before sending it back to the client.
+   - **Timeouts & Scalability**: Specifically tuned to handle long-running LLM inferences (up to 10 minutes) without dropping the HTTP connection, accommodating slow CPU-bound generation on CI or older hardware.
+
+3. **Inference Layer (Local LLM)**
+   - Powered by **Ollama** running the `llama3.2` model.
+   - Kept strictly local to guarantee data privacy for sensitive internal HR and performance review transcripts. 
+
+4. **CI/CD Pipeline**
+   - GitHub Actions workflow spins up a sidecar Ollama Docker container, pulls the model dynamically, and executes Jest integration tests to validate the full stack in an isolated environment.
 
 ## ⚙️ Setup Instructions
 
