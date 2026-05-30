@@ -266,9 +266,7 @@ function App() {
                   link.click();
                   setTimeout(() => {
                     try {
-                      if (link.parentNode === document.body) {
-                        document.body.removeChild(link);
-                      }
+                      document.body.removeChild(link);
                       URL.revokeObjectURL(url);
                     } catch (err) {
                       console.error('Error cleaning up download resources:', err);
