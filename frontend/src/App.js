@@ -256,8 +256,10 @@ function App() {
                   link.download = `audit-report-${new Date().getTime()}.json`;
                   document.body.appendChild(link);
                   link.click();
-                  document.body.removeChild(link);
-                  URL.revokeObjectURL(url);
+                  setTimeout(() => {
+                    document.body.removeChild(link);
+                    URL.revokeObjectURL(url);
+                  }, 100);
                 }}
               >
                 Finalize & Export Analysis
