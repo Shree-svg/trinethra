@@ -256,7 +256,7 @@ function App() {
                   const url = URL.createObjectURL(blob);
                   const link = document.createElement('a');
                   link.href = url;
-                  link.download = `audit-report-${new Date().getTime()}.json`;
+                  link.download = `audit-report-${Date.now()}.json`;
                   document.body.appendChild(link);
                   link.click();
                   setTimeout(() => {
