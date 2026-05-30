@@ -99,7 +99,7 @@ The backend will listen on **http://localhost:5001**.
 
 ### 3️⃣ Frontend
 ```bash
-cd ../frontend
+cd frontend
 npm install
 npm start
 ```
